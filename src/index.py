@@ -28,4 +28,4 @@ async def on_ready():
     print('My bot is ready')
     
 
-bot.run('ODY0NjA1MTYyNjIyODEyMTcw.YO34Tg.BbazNhL64kambzzifFAY_Lvbuqo')
+bot.run('')
