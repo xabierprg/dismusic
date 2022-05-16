@@ -6,6 +6,7 @@ from discord.ext import commands
              
 bot = commands.Bot(command_prefix='-', description='Im a music player bot')
              
+# Commands
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
@@ -18,11 +19,11 @@ async def info(ctx):
                           color=discord.Color.purple())
     
     embed.add_field(name="Server Owner", value="xabierprg")
-    embed.add_field(name="GitHub", value="xabierprg")
+    embed.add_field(name="GitHub", value="https://github.com/xabierprg/DisMusic")
     
     await ctx.send(embed=embed)
     
-#Events
+# Events
 @bot.event
 async def on_ready():
     print('My bot is ready')
