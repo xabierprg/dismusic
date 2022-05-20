@@ -29,7 +29,7 @@ async def commands(ctx):
     embed = discord.Embed(
         title=f"Commands",
         timestamp=datetime.datetime.utcnow(),
-        color=discord.Color.purple(),
+        color=discord.Color.purple()
     )
         
     embed.add_field(name="-play", value="play the song specified after the command", inline=False)
@@ -37,7 +37,9 @@ async def commands(ctx):
     embed.add_field(name="-pause", value="pause the song", inline=False)
     embed.add_field(name="-resume", value="resume the paused song", inline=False)
     embed.add_field(name="-skip", value="skip a song in the queue", inline=False)
-    embed.add_field(name="-stop", value="stop the player", inline=False)
+    embed.add_field(name="-shuffle", value="shuffle the queue", inline=False)
+    embed.add_field(name="-show", value="show the songs in the queue", inline=False)
+    embed.add_field(name="-stop", value="stop the player and clear the queue", inline=False)
     embed.add_field(name="-clear", value="clear the queue", inline=False)
     
     await ctx.send(embed=embed)
@@ -49,14 +51,12 @@ async def on_ready():
     
 @bot.event
 async def on_voice_state_update(member, before, after):
-    await member.guild.system_channel.send("Alarm!")
-    
     if before.channel is None and after.channel is not None:
-        await member.guild.system_channel.send("Conecting!")
+        print("Conecting!")
         return
         
     if before.channel is not None and after.channel is None:
-        await member.guild.system_channel.send("Disconecting!")
+        print("Disconecting!")
         return
     
 
@@ -81,6 +81,14 @@ async def skip(ctx):
     await player.skip_song(ctx)
     
 @bot.command()
+async def shuffle(ctx):
+    await player.shuffle_queue(ctx)
+    
+@bot.command()
+async def show(ctx):
+    await player.show_queue(ctx)
+    
+@bot.command()
 async def stop(ctx):
     await player.stop_player(ctx)
     
@@ -89,8 +97,6 @@ async def clear(ctx):
     await player.clear_queue(ctx)
 
 
-# Read the Discord bot token and the owner id from the .properties file.
-# Creates two global variables (TOKEN and OWNER_ID).
 def read_properties():
     global TOKEN
     global OWNER_ID
