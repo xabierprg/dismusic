@@ -39,26 +39,16 @@ async def commands(ctx):
     embed.add_field(name="-skip", value="skip a song in the queue", inline=False)
     embed.add_field(name="-shuffle", value="shuffle the queue", inline=False)
     embed.add_field(name="-show", value="show the songs in the queue", inline=False)
+    embed.add_field(name="-playing", value="show the playing track name", inline=False)
     embed.add_field(name="-stop", value="stop the player and clear the queue", inline=False)
     embed.add_field(name="-clear", value="clear the queue", inline=False)
     
     await ctx.send(embed=embed)
 
+
 @bot.event
 async def on_ready():
-    print("Logged in as:\n{0.user.name}\n{0.user.id}".format(bot))
-    
-    
-@bot.event
-async def on_voice_state_update(member, before, after):
-    if before.channel is None and after.channel is not None:
-        print("Conecting!")
-        return
-        
-    if before.channel is not None and after.channel is None:
-        print("Disconecting!")
-        return
-    
+    print("Logged in as:\n{0.user.name}\n{0.user.id}".format(bot))    
 
 @bot.command()
 async def play(ctx,* ,song):        
@@ -87,6 +77,10 @@ async def shuffle(ctx):
 @bot.command()
 async def show(ctx):
     await player.show_queue(ctx)
+    
+@bot.command()
+async def playing(ctx):
+    await player.show_playing_song(ctx)
     
 @bot.command()
 async def stop(ctx):

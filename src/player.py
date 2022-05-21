@@ -90,24 +90,24 @@ class Player():
         if not self.song_queue.empty():
             await self.play_song(ctx, self.song_queue.get())
         else:
-            await ctx.send("The queue is empty")
+            await ctx.send("*The queue is empty*")
         
         
     async def pause_song(self, ctx):
         if not ctx.voice_client.is_playing():
-            await ctx.send("There is no song playing")
+            await ctx.send("*There is no song playing*")
         
         if ctx.voice_client.is_playing():
             ctx.voice_client.pause()
         else:
-            await ctx.send("The song is already paused")
+            await ctx.send("*The song is already paused*")
             
             
     async def resume_song(self, ctx):
         if ctx.voice_client.is_paused():
             ctx.voice_client.resume()
         else:
-            await ctx.send("The song is already resumed")
+            await ctx.send("*The song is already resumed*")
             
             
     async def skip_song(self, ctx):
@@ -154,7 +154,11 @@ class Player():
         shuffle(song_list)
         self.song_queue = queue.SimpleQueue()
         [self.song_queue.put(i) for i in song_list]
-        await ctx.send("The queue was shuffled")
+        await ctx.send("*The queue was shuffled*")
+        
+
+    async def show_playing_song(self, ctx):
+        await ctx.send("**Playing:** " + self.playing)
         
         
     async def show_queue(self, ctx):
@@ -185,18 +189,18 @@ class Player():
             color=discord.Color.purple()
         )
         
-        embed.add_field(name="Playing:", value=self.playing, inline=False)
+        embed.add_field(name="Playing", value=self.playing, inline=False)
         
         if oversize:
-            embed.add_field(name="In queue:", value=song_list + "\n...", inline=False)
+            embed.add_field(name="In queue", value=song_list + "\n...", inline=False)
         else:
-            embed.add_field(name="In queue:", value=song_list, inline=False)
+            embed.add_field(name="In queue", value=song_list, inline=False)
         
         await ctx.send(embed=embed)
         
             
     async def clear_queue(self, ctx):
         self.song_queue = queue.SimpleQueue()
-        await ctx.send("The queue was cleared")
+        await ctx.send("*The queue was cleared*")
         
         
