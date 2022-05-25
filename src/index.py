@@ -2,6 +2,7 @@ import discord
 import datetime
 from discord.ext import commands
 from player import Player
+from properties import Properties
 
 
 # INITIALIZE MAIN OBJECTS
@@ -56,13 +57,13 @@ async def on_ready():
 
 """Play command."""
 @bot.command()
-async def play(ctx,* ,song):        
-    await player.play_song(ctx, song)
+async def play(ctx, *, track):
+    await player.play_song(ctx, track)
     
 """Add to the queue command."""
 @bot.command()
-async def add(ctx,* ,song):
-    await player.add_to_queue(ctx, song)
+async def add(ctx, *, track):
+    await player.add_to_queue(ctx, track)
     
 """Pause command."""
 @bot.command()
@@ -104,18 +105,6 @@ async def stop(ctx):
 async def clear(ctx):
     await player.clear_queue(ctx)
 
-"""This function read the .properties file with the bot tokens and ids"""
-def read_properties():
-    global TOKEN
-    global OWNER_ID
 
-    f = open("../.properties", "r")
-    lines = f.readlines()
-
-    TOKEN = lines[0].replace("\n", "").replace("TOKEN=", "")
-    OWNER_ID = lines[1].replace("\n", "").replace("OWNER_ID=", "")
-
-
-#MAIN THREAD
-read_properties()
-bot.run(TOKEN)
+# MAIN THREAD
+bot.run(Properties.TOKEN)

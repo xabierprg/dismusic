@@ -6,8 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-# Properties files
-.properties
+# Private properties file
+properties.py
 
 # Distribution / packaging
 .Python
