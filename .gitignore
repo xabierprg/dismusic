@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Private properties file
-src/properties.py
+properties.py
 
 # Distribution / packaging
 .Python
