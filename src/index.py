@@ -20,9 +20,9 @@ async def info(ctx):
         color=discord.Color.purple()
     )
 
-    embed.add_field(name="Server Owner", value="xabierprg#5284", inline=False)
-    embed.add_field(name="GitHub", value="https://github.com/xabierprg/DisMusic", inline=False)
-    embed.add_field(name="Commands", value="paste '-commands' to see all commands", inline=False)
+    embed.add_field(name="Server Owner",   value="xabierprg#5284",                           inline=False)
+    embed.add_field(name="GitHub",         value="https://github.com/xabierprg/DisMusic",    inline=False)
+    embed.add_field(name="Commands",       value="paste '-commands' to see all commands",    inline=False)
 
     await ctx.send(embed=embed)
     
@@ -36,16 +36,16 @@ async def commands(ctx):
         color=discord.Color.purple()
     )
         
-    embed.add_field(name="-play", value="play the song specified after the command", inline=False)
-    embed.add_field(name="-add", value="add a song to the queue", inline=False)
-    embed.add_field(name="-pause", value="pause the song", inline=False)
-    embed.add_field(name="-resume", value="resume the paused song", inline=False)
-    embed.add_field(name="-skip", value="skip a song in the queue", inline=False)
-    embed.add_field(name="-shuffle", value="shuffle the queue", inline=False)
-    embed.add_field(name="-show", value="show the songs in the queue", inline=False)
-    embed.add_field(name="-song", value="show the playing track name", inline=False)
-    embed.add_field(name="-stop", value="stop the player and clear the queue", inline=False)
-    embed.add_field(name="-clear", value="clear the queue", inline=False)
+    embed.add_field(name="-play",      value="play the song specified after the command",   inline=False)
+    embed.add_field(name="-add",       value="add a song to the queue",                     inline=False)
+    embed.add_field(name="-pause",     value="pause the song",                              inline=False)
+    embed.add_field(name="-resume",    value="resume the paused song",                      inline=False)
+    embed.add_field(name="-skip",      value="skip a song in the queue",                    inline=False)
+    embed.add_field(name="-shuffle",   value="shuffle the queue",                           inline=False)
+    embed.add_field(name="-show",      value="show the songs in the queue",                 inline=False)
+    embed.add_field(name="-song",      value="show the playing track name",                 inline=False)
+    embed.add_field(name="-stop",      value="stop the player and clear the queue",         inline=False)
+    embed.add_field(name="-clear",     value="clear the queue",                             inline=False)
     
     await ctx.send(embed=embed)
 
