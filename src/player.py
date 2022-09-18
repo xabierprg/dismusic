@@ -86,6 +86,8 @@ class Player:
     async def next_song(self, ctx):
         if not self.song_queue.empty():
             await self.play_song(ctx, self.song_queue.get())
+        else:
+            self.playing = ""
             
         
     """Pause the current song"""
@@ -141,6 +143,9 @@ class Player:
                 for s in song_list:
                     self.song_queue.put(s)
                 return
+            else:
+                videos_search = VideosSearch(song, limit=1)
+                self.song_queue.put(videos_search.result().get('result')[0].get('title'))
         else:
             if "https://open.spotify.com/playlist/" in song:
                 song_list = self.search_playlist(song)
@@ -188,10 +193,12 @@ class Player:
         
         if not len(songs) == 0:
             for i in range(25):
+                song_list += songs[i] + "\n"
+                
                 if i+1 == len(songs):
                     oversize = False
                     break
-                song_list += songs[i] + "\n"
+                
         else:
             song_list = "No track in queue"    
             oversize = False

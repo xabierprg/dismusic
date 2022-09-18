@@ -20,7 +20,7 @@ async def info(ctx):
         color=discord.Color.purple()
     )
 
-    embed.add_field(name="Server Owner",   value="xabierprg#5284",                           inline=False)
+    embed.add_field(name="Bot Owner",      value="xabierprg#5284",                           inline=False)
     embed.add_field(name="GitHub",         value="https://github.com/xabierprg/DisMusic",    inline=False)
     embed.add_field(name="Commands",       value="paste '-commands' to see all commands",    inline=False)
 
@@ -53,7 +53,21 @@ async def commands(ctx):
 """Launch event when the bot is ready."""
 @bot.event
 async def on_ready():
-    print("Logged in as:\n{0.user.name}\n{0.user.id}".format(bot))    
+    print("Logged in as:\n{0.user.name}\n{0.user.id}".format(bot))
+    
+
+@bot.command()
+async def mute(ctx):
+    voice_channel = ctx.author.voice.channel
+    for member in voice_channel.members:
+        await set_to_muted(member)
+            
+async def set_to_muted(member: discord.Member):
+    await member.edit(mute=True)
+
+async def set_to_unmuted(member: discord.Member):
+    await member.edit(mute=False)
+    
 
 """Play command."""
 @bot.command()
