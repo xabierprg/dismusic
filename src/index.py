@@ -2,7 +2,6 @@ import discord
 import datetime
 from discord.ext import commands
 from player import Player
-from properties import Properties
 
 
 # INITIALIZE MAIN OBJECTS
@@ -118,7 +117,12 @@ async def stop(ctx):
 @bot.command()
 async def clear(ctx):
     await player.clear_queue(ctx)
-
+    
+def readTOKEN():
+    f = open('../.properties','r')
+    lines = f.readlines()
+    return lines[0].replace("TOKEN = ","")
+    
 
 # MAIN THREAD
-bot.run(Properties.TOKEN)
+bot.run(readTOKEN())

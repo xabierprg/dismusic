@@ -4,11 +4,12 @@ import queue
 import spotipy
 import discord
 import datetime
-from properties import Properties
 from random import shuffle
 from spotipy.oauth2 import SpotifyClientCredentials
 from discord import FFmpegPCMAudio
 from youtubesearchpython import VideosSearch
+
+from index import readTOKEN
 
 
 """Music player manager"""
@@ -18,6 +19,8 @@ class Player:
         self.bot = bot  # bot main object
         self.playing = ""  # current playing song
         self.song_queue = queue.SimpleQueue()  # song queue variable
+        self.SPOTIFY_CLIENT_ID = ""
+        self.SPOTIFY_CLIENT_SECRET = ""
         self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}  # ffmpeg options
         
 
@@ -29,11 +32,23 @@ class Player:
         return link
     
     
+    """Read the tokens from properties files"""
+    @staticmethod
+    def readTOKENS(self):
+        f = open('../.properties','r')
+        lines = f.readlines()
+        self.SPOTIFY_CLIENT_ID = lines[2].replace("SPOTIFY_CLIENT_ID = ","")
+        self.SPOTIFY_CLIENT_SECRET = lines[3].replace("SPOTIFY_CLIENT_SECRET = ","")
+        
+        
+    
     """Make a list with the names of the songs from the playlist"""
     @staticmethod
-    def search_playlist(uri):
+    def search_playlist(self, uri):
+        self.readTOKENS()
         client_credentials_manager = SpotifyClientCredentials(
-            client_id=Properties.SPOTIFY_CLIENT_ID, client_secret=Properties.SPOTIFY_CLIENT_SECRET)
+            client_id=self.SPOTIFY_CLIENT_ID, client_secret=self.SPOTIFY_CLIENT_SECRET
+        )
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         playlist_URI = uri.split("/")[-1].split("?")[0]
         
