@@ -7,6 +7,8 @@ import datetime
 from random import shuffle
 from spotipy.oauth2 import SpotifyClientCredentials
 from discord import FFmpegPCMAudio
+import os
+from dotenv import load_dotenv
 from youtubesearchpython import VideosSearch
 
 
@@ -28,24 +30,14 @@ class Player:
         link = videos_search.result().get('result')[0].get('link')
         self.playing = videos_search.result().get('result')[0].get('title')
         return link
-    
-    
-    """Read the tokens from properties files"""
-    @staticmethod
-    def readTOKENS(self):
-        f = open('../.properties','r')
-        lines = f.readlines()
-        self.SPOTIFY_CLIENT_ID = lines[2].replace("SPOTIFY_CLIENT_ID = ","")
-        self.SPOTIFY_CLIENT_SECRET = lines[3].replace("SPOTIFY_CLIENT_SECRET = ","")
-        
-        
+            
     
     """Make a list with the names of the songs from the playlist"""
     @staticmethod
-    def search_playlist(self, uri):
-        self.readTOKENS()
+    def search_playlist(uri):
+        load_dotenv()
         client_credentials_manager = SpotifyClientCredentials(
-            client_id=self.SPOTIFY_CLIENT_ID, client_secret=self.SPOTIFY_CLIENT_SECRET
+            client_id=os.getenv("SPOTIFY_CLIENT_ID"), client_secret=os.getenv("SPOTIFY_CLIENT_SECRET")
         )
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         playlist_URI = uri.split("/")[-1].split("?")[0]

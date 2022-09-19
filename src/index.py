@@ -1,5 +1,7 @@
 import discord
 import datetime
+import os
+from dotenv import load_dotenv
 from discord.ext import commands
 from player import Player
 
@@ -117,12 +119,8 @@ async def stop(ctx):
 @bot.command()
 async def clear(ctx):
     await player.clear_queue(ctx)
-    
-def readTOKEN():
-    f = open('../.properties','r')
-    lines = f.readlines()
-    return lines[0].replace("TOKEN = ","")
-    
+
 
 # MAIN THREAD
-bot.run(readTOKEN())
+load_dotenv()
+bot.run(os.getenv("DISCORD_TOKEN"))
