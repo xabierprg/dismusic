@@ -123,4 +123,5 @@ async def clear(ctx):
 
 # MAIN THREAD
 load_dotenv()
-bot.run(os.getenv("DISCORD_TOKEN"))
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+bot.run(DISCORD_TOKEN)

@@ -36,8 +36,11 @@ class Player:
     @staticmethod
     def search_playlist(uri):
         load_dotenv()
+        SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
+        SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
+        
         client_credentials_manager = SpotifyClientCredentials(
-            client_id=os.getenv("SPOTIFY_CLIENT_ID"), client_secret=os.getenv("SPOTIFY_CLIENT_SECRET")
+            client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET
         )
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         playlist_URI = uri.split("/")[-1].split("?")[0]
