@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 "discord.py" = "*"
-youtube-search-python = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -9,8 +9,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from discord import FFmpegPCMAudio
 from youtubesearchpython import VideosSearch
 
-from index import readTOKEN
-
 
 """Music player manager"""
 class Player:
