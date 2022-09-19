@@ -1,3 +1,5 @@
 discord.py
 python-dotenv
 pafy
+git+https://github.com/Rapptz/discord.py
+ffmpeg
