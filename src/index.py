@@ -7,7 +7,7 @@ from player import Player
 
 
 # INITIALIZE MAIN OBJECTS
-bot = commands.Bot(command_prefix="-")
+bot = commands.Bot(command_prefix="-", intents=discord.Intents.default())
 player = Player(bot)
 
 
