@@ -85,7 +85,7 @@ class Player:
 
         song = pafy.new(self.search_video(video))
         audio = song.getbestaudio()
-        source = FFmpegPCMAudio(source=audio.url, executable="../ffmpeg.exe", before_options=self.FFMPEG_OPTIONS)
+        source = FFmpegPCMAudio(source=audio.url, executable="./ffmpeg.exe", before_options=self.FFMPEG_OPTIONS)
         ctx.voice_client.play(source)
         await self.loop(ctx)
                     
