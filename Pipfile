@@ -6,6 +6,14 @@ name = "pypi"
 [packages]
 "discord.py" = "*"
 python-dotenv = "*"
+pafy = "*"
+asyncio = "*"
+spotipy = "*"
+discord = "*"
+load-dotenv = "*"
+datetime = "*"
+youtube-search-python = "*"
+youtube-dl = "*"
 
 [dev-packages]
 
