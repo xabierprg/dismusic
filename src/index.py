@@ -7,7 +7,10 @@ from player import Player
 
 
 # INITIALIZE MAIN OBJECTS
-bot = commands.Bot(command_prefix="-", intents=discord.Intents.all())
+intents = discord.Intents.default()
+intents.message_content = True
+intents.voice_states = True
+bot = commands.Bot(command_prefix="-", intents=intents)
 player = Player(bot)
 
 
