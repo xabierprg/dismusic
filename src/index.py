@@ -26,7 +26,7 @@ async def info(ctx):
 
     embed.add_field(name="Bot Owner",      value="xabierprg#5284",                           inline=False)
     embed.add_field(name="GitHub",         value="https://github.com/xabierprg/DisMusic",    inline=False)
-    embed.add_field(name="Commands",       value="paste '-commands' to see all commands",    inline=False)
+    embed.add_field(name="Commands",       value="paste '-commands' to see all my commands",    inline=False)
 
     await ctx.send(embed=embed)
     
@@ -36,7 +36,7 @@ async def info(ctx):
 async def commands(ctx):
     embed = discord.Embed(
         title=f"Commands",
-        timestamp=datetime.datetime.utcnow(),
+        timestamp=datetime.UTC,
         color=discord.Color.purple()
     )
         
@@ -58,20 +58,6 @@ async def commands(ctx):
 @bot.event
 async def on_ready():
     print("Logged in as:\n{0.user.name}\n{0.user.id}".format(bot))
-    
-
-@bot.command()
-async def mute(ctx):
-    voice_channel = ctx.author.voice.channel
-    for member in voice_channel.members:
-        await set_to_muted(member)
-            
-async def set_to_muted(member: discord.Member):
-    await member.edit(mute=True)
-
-async def set_to_unmuted(member: discord.Member):
-    await member.edit(mute=False)
-    
 
 """Play command."""
 @bot.command()

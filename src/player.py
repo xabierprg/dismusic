@@ -4,6 +4,7 @@ import queue
 import spotipy
 import discord
 import datetime
+import yt_dlp as youtube_dl
 from random import shuffle
 from spotipy.oauth2 import SpotifyClientCredentials
 from discord import FFmpegPCMAudio
@@ -95,6 +96,7 @@ class Player:
         if not self.song_queue.empty():
             await self.play_song(ctx, self.song_queue.get())
         else:
+            await ctx.voice_client.disconnect()
             self.playing = ""
             
         
@@ -127,7 +129,9 @@ class Player:
             
         if ctx.voice_client.is_playing():
             ctx.voice_client.pause()
+            
         await self.next_song(ctx)
+        await self.is_playing(ctx)
         
             
     """Stop the player and disconnects the bot"""
@@ -139,7 +143,7 @@ class Player:
             await self.pause_song(ctx)
             await ctx.voice_client.disconnect()
         
-    
+        
     """Add a song or a playlist to the queue"""
     async def add_to_queue(self, ctx, song):
         if ctx.voice_client is None:
@@ -233,5 +237,14 @@ class Player:
     async def clear_queue(self, ctx):
         self.song_queue = queue.SimpleQueue()
         await ctx.send("*The queue was cleared*")
+        
+        
+    async def is_playing(self, ctx):
+        embed = discord.Embed(
+            timestamp=datetime.datetime.utcnow(),
+            color=discord.Color.purple()
+        )
+        embed.add_field(name="Playing: ", value=self.playing, inline=True)
+        await ctx.send(embed=embed)
         
         
